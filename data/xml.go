@@ -15,14 +15,14 @@ type MedicalProduct struct {
 	CommonProductName string     `xml:"nazwaPowszechnieStosowana,attr"`
 	Strength          string     `xml:"moc,attr"`
 	Form              string     `xml:"postac,attr"`
-	ResponsibleEntity string     `xml:"podmiotOdpowiedzialny,attr"`
+	ResponsibleEntity string     `xml:"podmiotOdpowiedzielny,attr"`
 	ActiveSubstances  []string   `xml:"substancjeCzynne>substancjaCzynna"`
 	Packages          []*Package `xml:"opakowania>opakowanie"`
 }
 
 type Package struct {
 	XMLName  xml.Name `xml:"opakowanie"`
-	Size     string      `xml:"wielkosc,attr"`
+	Size     string   `xml:"wielkosc,attr"`
 	SizeUnit string   `xml:"jednostkaWielkosci,attr"`
 	Ean      string   `xml:"kodEAN,attr"`
 }
