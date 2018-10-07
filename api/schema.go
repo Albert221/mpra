@@ -16,8 +16,10 @@ func NewSchema(updateChan chan bool) *Schema {
 	schema := &Schema{getMedicalProducts()}
 
 	go func() {
-		<-updateChan
-		schema.medicalProducts = getMedicalProducts()
+		for {
+			<-updateChan
+			schema.medicalProducts = getMedicalProducts()
+		}
 	}()
 
 	return schema
