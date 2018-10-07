@@ -1,0 +1,24 @@
+schema {
+    query: Query
+}
+
+type Query {
+    product(ean: String!): Product
+}
+
+type Product {
+    name: String!
+    commonName: String
+    type: String!
+    strength: String!
+    form: String!
+    responsibleEntity: String!
+    activeSubstances: [String!]!
+    packages: [Package!]!
+}
+
+type Package {
+    ean: String!
+    size: Int!
+    sizeUnit: String!
+}
