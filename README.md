@@ -1,8 +1,8 @@
 # Medicinal products registry API
 
-This is a webserver which exposes a convenient GraphQL endpoint for fetching data from [polish register of medicinal products][register] which is a public data from [dane.gov.pl].
+This is a webserver which exposes a convenient GraphQL endpoint for fetching data from [polish register of medicinal products][registry] which is a public data from [dane.gov.pl].
 
-The new data is fetched every 20 minutes (and this can be changed in code) from the server.
+New data is fetched every 20 minutes (and this can be changed in code) from the server.
 
 ## Compilation & usage
 
@@ -24,7 +24,7 @@ Below screenshot shows all endpoints and fields exposed in the API.
 
 ...is welcome! :)
 
-[register]: https://dane.gov.pl/dataset/397/resource/1851
+[registry]: https://dane.gov.pl/dataset/397/resource/1851
 [dane.gov.pl]: https://dane.gov.pl
 [Dep]: https://golang.github.io/dep/
 [api-screenshot]: https://i.imgur.com/xI8BmCO.png
