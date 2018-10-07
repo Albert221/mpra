@@ -13,7 +13,7 @@ func main() {
 	downloader := Downloader{TargetFilename: "dataset.xml"}
 
 	updatedChan := make(chan bool)
-	go downloader.ScheduleDownloads(2 * time.Second, updatedChan)
+	go downloader.ScheduleDownloads(20 * time.Minute, updatedChan)
 
 	<-updatedChan
 	schema := api.NewSchema(updatedChan)
