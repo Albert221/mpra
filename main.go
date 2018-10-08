@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 	"time"
@@ -15,19 +16,14 @@ func main() {
 	updatedChan := make(chan bool)
 	go downloader.ScheduleDownloads(20*time.Minute, updatedChan)
 
-	schema, err := api.NewSchema()
-	if err != nil {
-		panic(err)
-	}
-
 	<-updatedChan
-	err = schema.RefershMedicalProducts()
+	schema, err := api.NewSchema(updatedChan)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	http.Handle("/query", &relay.Handler{Schema: schema.CreateGraphQLSchema()})
 	if err := http.ListenAndServe(os.Getenv("MPR_ADDR"), nil); err != nil {
-		panic(err)
+		log.Println(err)
 	}
 }

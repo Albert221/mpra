@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/xml"
 	"io/ioutil"
+	"log"
 
 	"github.com/Albert221/medicinal-products-registry-api/data"
 	graphql "github.com/graph-gophers/graphql-go"
@@ -15,16 +16,21 @@ const (
 
 // Schema represents API Schema
 type Schema struct {
+	updateChan      chan bool
 	medicalProducts *data.MedicalProducts
 }
 
 // NewSchema return a pointer to API Schema
-func NewSchema() (*Schema, error) {
-	pp, err := getMedicalProducts()
+func NewSchema(updateChan chan bool) (*Schema, error) {
+	products, err := getMedicalProducts()
 	if err != nil {
 		return nil, err
 	}
-	return &Schema{medicalProducts: pp}, nil
+	schema := Schema{medicalProducts: products, updateChan: updateChan}
+
+	// run service for schema update
+	go schema.runUpdateService()
+	return &schema, nil
 }
 
 // CreateGraphQLSchema returns graphql API schema
@@ -37,15 +43,18 @@ func (s *Schema) CreateGraphQLSchema() *graphql.Schema {
 	return graphql.MustParseSchema(string(file), s)
 }
 
-// RefershMedicalProducts updates schema's medical products
-func (s *Schema) RefershMedicalProducts() error {
-	pp, err := getMedicalProducts()
-	if err != nil {
-		return err
-	}
+func (s *Schema) runUpdateService() {
+	for {
+		select {
+		case <-s.updateChan:
+			pp, err := getMedicalProducts()
+			if err != nil {
+				log.Println(err)
+			}
 
-	s.medicalProducts = pp
-	return nil
+			s.medicalProducts = pp
+		}
+	}
 }
 
 func getMedicalProducts() (*data.MedicalProducts, error) {
