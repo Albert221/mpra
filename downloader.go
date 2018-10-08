@@ -46,7 +46,7 @@ func (d *Downloader) Download() error {
 }
 
 func (d *Downloader) ensureDownloadDirectory() {
-	os.Mkdir(DownloadsDir, 0544)
+	os.Mkdir(DownloadsDir, 0755)
 }
 
 func (d *Downloader) fetchDownloadUrl() (string, error) {
