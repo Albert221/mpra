@@ -47,12 +47,12 @@ func (s *Schema) runUpdateService() {
 	for {
 		select {
 		case <-s.updateChan:
-			pp, err := getMedicalProducts()
+			products, err := getMedicalProducts()
 			if err != nil {
 				log.Println(err)
 			}
 
-			s.medicalProducts = pp
+			s.medicalProducts = products
 		}
 	}
 }
