@@ -10,6 +10,10 @@ import (
 	"github.com/graph-gophers/graphql-go/relay"
 )
 
+const (
+	graphiqlDir string = "./graphiql"
+)
+
 func main() {
 	downloader := Downloader{TargetFilename: "dataset.xml"}
 
@@ -23,6 +27,7 @@ func main() {
 	}
 
 	http.Handle("/query", &relay.Handler{Schema: schema.CreateGraphQLSchema()})
+	http.Handle("/", http.FileServer(http.Dir(graphiqlDir)))
 	if err := http.ListenAndServe(os.Getenv("MPR_ADDR"), nil); err != nil {
 		log.Println(err)
 	}
