@@ -22,8 +22,9 @@
     <div id="workspace" class="graphiql-workspace"></div>
 
     <script>
-      var host = window.location.host
-      var config = new graphiqlWorkspace.AppConfig("GraphiQL", {defaultUrl: "http://"+host+"/query"});
+      var host = window.location.host,
+          protocol =  window.location.protocol,
+          config = new graphiqlWorkspace.AppConfig("GraphiQL", {defaultUrl: protocol+"//"+host+"/query"});
 
       ReactDOM.render(
         React.createElement(graphiqlWorkspace.GraphiQLWorkspace, {config: config}),
