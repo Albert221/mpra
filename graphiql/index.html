@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <style>
-        div.tab-form > form > div:nth-child(4), div.tab-form > form > div:nth-child(3), div.topBarWrap > div > div.toolbar, #used-url {display: none;}
+        div.tab-top, #main-tabs > ul{display: none;}
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,8 @@
     <div id="workspace" class="graphiql-workspace"></div>
 
     <script>
-      var config = new graphiqlWorkspace.AppConfig("GraphiQL", {});
+      var host = window.location.host
+      var config = new graphiqlWorkspace.AppConfig("GraphiQL", {defaultUrl: "http://"+host+"/query"});
 
       ReactDOM.render(
         React.createElement(graphiqlWorkspace.GraphiQLWorkspace, {config: config}),
