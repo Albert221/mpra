@@ -1,29 +1,53 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"time"
 
-	"github.com/Albert221/medicinal-products-registry-api/api"
+	"github.com/Albert221/medicinal-products-registry-api/graphql"
+	"github.com/Albert221/medicinal-products-registry-api/puller"
 	"github.com/graph-gophers/graphql-go/relay"
+	"github.com/markbates/pkger"
 )
 
+var (
+	host          string
+	port          string
+	datasetPath   string
+	refreshPeriod time.Duration
+)
+
+func init() {
+	flag.StringVar(&host, "host", "", "hostname to listen on")
+	flag.StringVar(&port, "port", "8080", "port to listen on")
+	flag.StringVar(&datasetPath, "dataset", "dataset.xml", "path to the file which the dataset will be cached to")
+	flag.DurationVar(&refreshPeriod, "refresh", 1*time.Hour, "period every which the dataset will be refreshed")
+}
+
 func main() {
-	downloader := Downloader{TargetFilename: "dataset.xml"}
+	flag.Parse()
 
-	updatedChan := make(chan bool)
-	go downloader.ScheduleDownloads(20*time.Minute, updatedChan)
-
-	<-updatedChan
-	schema, err := api.NewSchema(updatedChan)
+	q := graphql.NewQuery()
+	schema, err := q.CreateSchema()
 	if err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
 
-	http.Handle("/query", &relay.Handler{Schema: schema.CreateGraphQLSchema()})
-	if err := http.ListenAndServe(os.Getenv("MPR_ADDR"), nil); err != nil {
-		log.Println(err)
-	}
+	datasetPuller := puller.NewDatasetPuller(datasetPath, refreshPeriod, q)
+	go (func() {
+		if err := datasetPuller.Run(); err != nil {
+			log.Fatal(err)
+		}
+	})()
+
+	// GraphQL Playground
+	http.Handle("/", http.FileServer(pkger.Dir("/public")))
+	http.Handle("/graphql", &relay.Handler{Schema: schema})
+
+	addr := fmt.Sprintf("%s:%s", host, port)
+	fmt.Printf("Listening on %s...\n", addr)
+	log.Fatal(http.ListenAndServe(addr, nil))
 }

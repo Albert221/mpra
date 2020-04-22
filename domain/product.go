@@ -1,14 +1,8 @@
-package data
+package domain
 
 import "encoding/xml"
 
-type MedicalProducts struct {
-	XMLName  xml.Name          `xml:"produktyLecznicze"`
-	AsOfDay  string            `xml:"stanNaDzien,attr"`
-	Children []*MedicalProduct `xml:"produktLeczniczy"`
-}
-
-type MedicalProduct struct {
+type Product struct {
 	XMLName           xml.Name   `xml:"produktLeczniczy"`
 	ProductName       string     `xml:"nazwaProduktu,attr"`
 	Kind              string     `xml:"rodzajPreparatu,attr"`
@@ -20,9 +14,18 @@ type MedicalProduct struct {
 	Packages          []*Package `xml:"opakowania>opakowanie"`
 }
 
-type Package struct {
-	XMLName  xml.Name `xml:"opakowanie"`
-	Size     string   `xml:"wielkosc,attr"`
-	SizeUnit string   `xml:"jednostkaWielkosci,attr"`
-	Ean      string   `xml:"kodEAN,attr"`
+type root struct {
+	XMLName  xml.Name   `xml:"produktyLecznicze"`
+	AsOfDay  string     `xml:"stanNaDzien,attr"`
+	Children []*Product `xml:"produktLeczniczy"`
+}
+
+func UnmarshallProducts(data []byte) ([]*Product, error) {
+	var products root
+	err := xml.Unmarshal(data, &products)
+	if err != nil {
+		return nil, err
+	}
+
+	return products.Children, err
 }

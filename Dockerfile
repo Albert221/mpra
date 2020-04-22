@@ -15,6 +15,5 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 
 COPY --from=builder /go/src/github.com/Albert221/medicinal-products-registry-api/app .
-COPY --from=builder /go/src/github.com/Albert221/medicinal-products-registry-api/schema.graphql .
 
 CMD ["./app"]

@@ -1,12 +1,13 @@
-package api
+package graphql
 
 import (
-	"github.com/Albert221/medicinal-products-registry-api/data"
 	"strconv"
+
+	"github.com/Albert221/medicinal-products-registry-api/domain"
 )
 
 type Package struct {
-	pack *data.Package
+	pack *domain.Package
 }
 
 func (p *Package) Ean() string {

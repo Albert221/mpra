@@ -1,21 +1,9 @@
-package api
+package graphql
 
-import "github.com/Albert221/medicinal-products-registry-api/data"
+import "github.com/Albert221/medicinal-products-registry-api/domain"
 
 type Product struct {
-	product *data.MedicalProduct
-}
-
-func (s *Schema) Product(args struct{ Ean string }) *Product {
-	for _, product := range s.medicalProducts.Children {
-		for _, pack := range product.Packages {
-			if pack.Ean == args.Ean {
-				return &Product{product}
-			}
-		}
-	}
-
-	return nil
+	product *domain.Product
 }
 
 func (p *Product) Name() string {
