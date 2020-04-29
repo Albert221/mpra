@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Albert221/medicinal-products-registry-api/domain"
+	"github.com/Albert221/mpra/domain"
 	gql "github.com/graph-gophers/graphql-go"
 	"github.com/markbates/pkger"
 	"github.com/pkg/errors"

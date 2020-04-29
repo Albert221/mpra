@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Albert221/medicinal-products-registry-api/graphql"
-	"github.com/Albert221/medicinal-products-registry-api/puller"
+	"github.com/Albert221/mpra/graphql"
+	"github.com/Albert221/mpra/puller"
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/markbates/pkger"
 )

@@ -1,6 +1,6 @@
 package graphql
 
-import "github.com/Albert221/medicinal-products-registry-api/domain"
+import "github.com/Albert221/mpra/domain"
 
 type Product struct {
 	product *domain.Product

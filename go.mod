@@ -1,4 +1,4 @@
-module github.com/Albert221/medicinal-products-registry-api
+module github.com/Albert221/mpra
 
 go 1.14
 

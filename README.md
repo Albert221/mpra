@@ -11,7 +11,7 @@ You can run this project using Docker or Go (1.14 or newer).
 ##### Docker
 
 ```bash
-git clone https://github.com/Albert221/medicinal-products-registry-api.git mpra && cd mpra
+git clone https://github.com/Albert221/mpra.git mpra && cd mpra
 docker build --tag mpra:latest .
 docker run --publish 8080:8080 mpra:latest
 ```
@@ -20,7 +20,7 @@ docker run --publish 8080:8080 mpra:latest
 ##### Go
 
 ```bash
-git clone https://github.com/Albert221/medicinal-products-registry-api.git mpra && cd mpra
+git clone https://github.com/Albert221/mpra.git mpra && cd mpra
 go get github.com/markbates/pkger/cmd/pkger
 pkger
 go build -o mpra .

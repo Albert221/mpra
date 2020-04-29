@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/Albert221/medicinal-products-registry-api/domain"
+	"github.com/Albert221/mpra/domain"
 	"github.com/pkg/errors"
 	"github.com/tidwall/gjson"
 )
