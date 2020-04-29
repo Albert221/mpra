@@ -24,9 +24,10 @@ git clone https://github.com/Albert221/mpra.git mpra && cd mpra
 go get github.com/markbates/pkger/cmd/pkger
 pkger
 go build -o mpra .
+./mpra
 ```
 
-### Usage
+You can set few arguments using the command line, use `./mpra -help` for help:
 
 ```
 $ ./mpra -help
