@@ -1,24 +1,45 @@
-# Medicinal products registry API
+# Medicinal Products Registry API
 
 This is a webserver which exposes a convenient GraphQL endpoint for fetching data from [polish register of medicinal products][registry] which is a public data from [dane.gov.pl].
 
-New data is fetched every 20 minutes (and this can be changed in code) from the server.
+![GraphQL Playground screenshot][api-screenshot]
 
 ## Compilation & usage
 
-To compile, you need to install dependencies by `dep ensure` (you need [Dep]) in project's directory. Then, all you have to do is to run `go build`.
+You can run this project using Docker or Go (1.14 or newer).
 
-To run the server, you need to provide the `MPR_ADDR` environment variable to tell the server on what to listen (this can be `:8080`, for example).
+##### Docker
 
 ```bash
-MPR_ADDR=localhost:80 ./app
+git clone https://github.com/Albert221/medicinal-products-registry-api.git mpra && cd mpra
+docker build --tag mpra:latest .
+docker run --publish 8080:8080 mpra:latest
 ```
 
-## API
 
-Below screenshot shows all endpoints and fields exposed in the API.
+##### Go
 
-![Insomnia screenshot][api-screenshot]
+```bash
+git clone https://github.com/Albert221/medicinal-products-registry-api.git mpra && cd mpra
+go get github.com/markbates/pkger/cmd/pkger
+pkger
+go build -o mpra .
+```
+
+### Usage
+
+```
+$ ./mpra -help
+Usage of ./mpra:
+  -dataset string
+        path to the file which the dataset will be cached to (default "dataset.xml")
+  -host string
+        hostname to listen on
+  -port string
+        port to listen on (default "8080")
+  -refresh duration
+        period every which the dataset will be refreshed (default 1h0m0s)
+```
 
 ## Contributing
 
@@ -26,5 +47,4 @@ Below screenshot shows all endpoints and fields exposed in the API.
 
 [registry]: https://dane.gov.pl/dataset/397/resource/1851
 [dane.gov.pl]: https://dane.gov.pl
-[Dep]: https://golang.github.io/dep/
-[api-screenshot]: https://i.imgur.com/xI8BmCO.png
+[api-screenshot]: https://i.imgur.com/gfoPieX.png
