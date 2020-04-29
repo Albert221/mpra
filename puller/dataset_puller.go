@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	apiEndpoint            = "https://api.dane.gov.pl/resources/1851"
-	apiDownloadUrlJsonPath = "data.attributes.file_url"
+	apiEndpoint            = "https://api.dane.gov.pl/resources/23421"
+	apiDownloadUrlJsonPath = "data.attributes.link"
 )
 
 type DatasetPuller struct {
