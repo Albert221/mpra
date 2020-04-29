@@ -1,19 +1,19 @@
-FROM golang:1.10 as builder
+FROM golang:1.14 as builder
 
-WORKDIR /go/src/github.com/Albert221/medicinal-products-registry-api
-
+WORKDIR /mpra
 COPY . .
-
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+RUN go get github.com/markbates/pkger/cmd/pkger
+RUN pkger
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o mpra .
 
 FROM alpine:latest
 
-ENV MPR_ADDR=:80
+ENV HOST=
+ENV PORT=8080
+ENV REFRESH=1h
 
 RUN apk --no-cache add ca-certificates
+WORKDIR /mpra
+COPY --from=builder /mpra .
 
-WORKDIR /root/
-
-COPY --from=builder /go/src/github.com/Albert221/medicinal-products-registry-api/app .
-
-CMD ["./app"]
+CMD ./mpra -host=$HOST -port=$PORT -refresh=$REFRESH
