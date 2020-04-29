@@ -3,7 +3,12 @@ schema {
 }
 
 type Query {
-    product(ean: String!): Product
+    products(ean: String!): [Product!]!
+}
+
+enum ProductType {
+    HUMAN
+    VETERINARY
 }
 
 type Product {
@@ -19,6 +24,6 @@ type Product {
 
 type Package {
     ean: String!
-    size: Int!
+    size: String!
     sizeUnit: String!
 }

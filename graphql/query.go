@@ -2,6 +2,7 @@ package graphql
 
 import (
 	"io/ioutil"
+	"strings"
 	"sync"
 
 	"github.com/Albert221/medicinal-products-registry-api/domain"
@@ -41,17 +42,19 @@ func (q *Query) Populate(products []*domain.Product) {
 	q.products = products
 }
 
-func (q *Query) Product(args struct{ Ean string }) *Product {
+func (q *Query) Products(args struct{ Ean string }) []*Product {
 	q.lock.RLock()
 	defer q.lock.RUnlock()
 
+	var results []*Product
+
 	for _, product := range q.products {
 		for _, pack := range product.Packages {
-			if pack.Ean == args.Ean {
-				return &Product{product}
+			if strings.Contains(pack.Ean, args.Ean) {
+				results = append(results, &Product{product})
 			}
 		}
 	}
 
-	return nil
+	return results
 }

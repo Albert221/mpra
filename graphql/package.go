@@ -1,8 +1,6 @@
 package graphql
 
 import (
-	"strconv"
-
 	"github.com/Albert221/medicinal-products-registry-api/domain"
 )
 
@@ -14,9 +12,8 @@ func (p *Package) Ean() string {
 	return p.pack.Ean
 }
 
-func (p *Package) Size() (int32, error) {
-	num, err := strconv.Atoi(p.pack.Size)
-	return int32(num), err
+func (p *Package) Size() string {
+	return p.pack.Size
 }
 
 func (p *Package) SizeUnit() string {
