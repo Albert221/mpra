@@ -6,11 +6,6 @@ type Query {
     products(ean: String!): [Product!]!
 }
 
-enum ProductType {
-    HUMAN
-    VETERINARY
-}
-
 type Product {
     name: String!
     commonName: String
