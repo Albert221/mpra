@@ -1,6 +1,8 @@
 # Medicinal Products Registry API
 
-This is a webserver which exposes a convenient GraphQL endpoint for fetching data from [polish register of medicinal products][registry] which is a public data from [dane.gov.pl].
+[![FOSSA Status][fossa-badge]][fossa-link]
+
+This is a webserver that exposes a convenient GraphQL endpoint for fetching data from [polish register of medicinal products][registry] which is a public data from [dane.gov.pl].
 
 ![GraphQL Playground screenshot][api-screenshot]
 
@@ -49,3 +51,10 @@ Usage of ./mpra:
 [registry]: https://dane.gov.pl/dataset/397/resource/1851
 [dane.gov.pl]: https://dane.gov.pl
 [api-screenshot]: https://i.imgur.com/gfoPieX.png
+[fossa-badge]: https://app.fossa.io/api/projects/git%2Bgithub.com%2FAlbert221%2Fmpra.svg?type=shield
+[fossa-link]: https://app.fossa.io/projects/git%2Bgithub.com%2FAlbert221%2Fmpra?ref=badge_shield
+
+
+## License
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAlbert221%2Fmpra.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FAlbert221%2Fmpra?ref=badge_large)
