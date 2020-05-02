@@ -52,9 +52,10 @@ Usage of ./mpra:
 [dane.gov.pl]: https://dane.gov.pl
 [api-screenshot]: https://i.imgur.com/gfoPieX.png
 [fossa-badge]: https://app.fossa.io/api/projects/git%2Bgithub.com%2FAlbert221%2Fmpra.svg?type=shield
-[fossa-link]: https://app.fossa.io/projects/git%2Bgithub.com%2FAlbert221%2Fmpra?ref=badge_shield
+[fossa-large]: https://app.fossa.io/api/projects/git%2Bgithub.com%2FAlbert221%2Fmpra.svg?type=large
+[fossa-link]: https://app.fossa.io/projects/git%2Bgithub.com%2FAlbert221%2Fmpra
 
 
 ## License
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAlbert221%2Fmpra.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FAlbert221%2Fmpra?ref=badge_large)
+[![FOSSA Status][fossa-large]][fossa-link]
